@@ -1,5 +1,6 @@
 package com.example.datingApp.dtos;
 
-public record UserDto() {
-    //TODO add logic
+import java.util.Date;
+
+public record UserDto(String name, Date age, String email) {
 }

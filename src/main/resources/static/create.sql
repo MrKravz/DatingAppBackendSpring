@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS goals;
+DROP TABLE IF EXISTS zodiac_signs;
 DROP TABLE IF EXISTS alcohol_attitudes;
 DROP TABLE IF EXISTS smoking_attitudes;
 DROP TABLE IF EXISTS sport_attitudes;
@@ -73,18 +74,18 @@ CREATE TABLE hobbies
 );
 CREATE TABLE profiles
 (
-    id               INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    users_id         INT REFERENCES users (id)             NOT NULL UNIQUE,
-    height           INT,
-    about            VARCHAR(500),
-    zodiac_sign      INT REFERENCES zodiac_signs (id)      NOT NULL,
-    location_country INT REFERENCES countries (id)         NOT NULL,
-    location_city    INT REFERENCES cities (id)            NOT NULL,
-    goal             INT REFERENCES goals (id)             NOT NULL,
-    alcohol_attitude INT REFERENCES alcohol_attitudes (id) NOT NULL,
-    smoking_attitude INT REFERENCES smoking_attitudes (id) NOT NULL,
-    sport_attitude   INT REFERENCES sport_attitudes (id)   NOT NULL,
-    pet_attitude     INT REFERENCES pet_attitudes (id)     NOT NULL
+    id                  INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id             INT REFERENCES users (id)             NOT NULL UNIQUE,
+    height              INT,
+    about               VARCHAR(500),
+    zodiac_sign_id      INT REFERENCES zodiac_signs (id)      NOT NULL,
+    location_country_id INT REFERENCES countries (id)         NOT NULL,
+    location_city_id    INT REFERENCES cities (id)            NOT NULL,
+    goal_id             INT REFERENCES goals (id)             NOT NULL,
+    alcohol_attitude_id INT REFERENCES alcohol_attitudes (id) NOT NULL,
+    smoking_attitude_id INT REFERENCES smoking_attitudes (id) NOT NULL,
+    sport_attitude_id   INT REFERENCES sport_attitudes (id)   NOT NULL,
+    pet_attitude_id     INT REFERENCES pet_attitudes (id)     NOT NULL
 );
 CREATE TABLE profiles_interests
 (

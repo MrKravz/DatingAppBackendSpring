@@ -17,11 +17,7 @@ public class Role {
     @Column(name = "name_of_role")
     private String name;
 
-    @OneToOne()
-    @JoinColumn(
-            name = "role_id",
-            referencedColumnName = "id"
-    )
+    @OneToOne(mappedBy = "role")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private User user;

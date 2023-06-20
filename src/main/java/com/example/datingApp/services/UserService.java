@@ -1,5 +1,6 @@
 package com.example.datingApp.services;
 
+import com.example.datingApp.exceptions.UserNotFoundException;
 import com.example.datingApp.models.User;
 import com.example.datingApp.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class UserService implements CrudService<User>{
 
     @Override
     public User findById(int id) {
-        return userRepository.findById(id).orElseThrow(RuntimeException::new);
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override

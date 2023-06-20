@@ -1,5 +1,6 @@
 package com.example.datingApp.services;
 
+import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.repositories.ProfileRepository;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class ProfileService implements CrudService<Profile>{
 
     @Override
     public Profile findById(int id) {
-        return profileRepository.findById(id).orElseThrow(RuntimeException::new); //TODO Implement ex
+        return profileRepository.findById(id).orElseThrow(ProfileNotFoundException::new);
     }
 
     @Override
@@ -35,7 +36,16 @@ public class ProfileService implements CrudService<Profile>{
     @Transactional
     public Profile update(Profile entity, int id) {
         var profileToUpdate = findById(id);
-        // TODO write fields to change
+        profileToUpdate.setHeight(entity.getHeight());
+        profileToUpdate.setAbout(entity.getAbout());
+        profileToUpdate.setCountry(entity.getCountry());
+        profileToUpdate.setCity(entity.getCity());
+        profileToUpdate.setZodiacSign(entity.getZodiacSign());
+        profileToUpdate.setGoal(entity.getGoal());
+        profileToUpdate.setAlcoholAttitude(entity.getAlcoholAttitude());
+        profileToUpdate.setSmokingAttitude(entity.getSmokingAttitude());
+        profileToUpdate.setSportAttitude(entity.getSportAttitude());
+        profileToUpdate.setPetAttitude(entity.getPetAttitude());
         return profileRepository.save(profileToUpdate);
     }
 

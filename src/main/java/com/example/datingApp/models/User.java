@@ -2,6 +2,10 @@ package com.example.datingApp.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @Entity
@@ -16,7 +20,9 @@ public class User {
     private String name;
 
     @Column(name = "age")
-    private int age;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date age;
 
     @Column(name = "email")
     private String email;
@@ -24,8 +30,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Role role;
 
-    //TODO change logic to match db entity
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private Profile profile;
 }
