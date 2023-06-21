@@ -1,7 +1,9 @@
 package com.example.datingApp.controllers;
 
+import com.example.datingApp.dtos.ProfileDto;
 import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.exceptions.errorResponses.ProfileErrorResponse;
+import com.example.datingApp.mappers.ProfileMapper;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.services.ProfileService;
 import lombok.AllArgsConstructor;
@@ -14,10 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final ProfileMapper profileMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Profile> getProfileById(@PathVariable("id") int id){
-        return new ResponseEntity<>(profileService.findById(id), HttpStatus.OK);
+    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("id") int id){
+        return new ResponseEntity<>(profileMapper.toDto(profileService.findById(id)), HttpStatus.OK);
     }
 
     @ExceptionHandler

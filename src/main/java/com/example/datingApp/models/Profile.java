@@ -64,17 +64,17 @@ public class Profile {
 
     @ManyToOne
     @JoinColumn(
-            name = "smoking_attitude_id",
-            referencedColumnName = "id"
-    )
-    private SmokingAttitude smokingAttitude;
-
-    @ManyToOne
-    @JoinColumn(
             name = "alcohol_attitude_id",
             referencedColumnName = "id"
     )
     private AlcoholAttitude alcoholAttitude;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "smoking_attitude_id",
+            referencedColumnName = "id"
+    )
+    private SmokingAttitude smokingAttitude;
 
     @ManyToOne
     @JoinColumn(
