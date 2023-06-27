@@ -1,4 +1,4 @@
-package com.example.datingApp.services;
+package com.example.datingApp.services.crud;
 
 import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.models.Profile;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class ProfileService implements CrudService<Profile>{
+public class ProfileService implements CrudService<Profile> {
 
     private final ProfileRepository profileRepository;
 
@@ -23,7 +23,7 @@ public class ProfileService implements CrudService<Profile>{
 
     @Override
     public Profile findById(int id) {
-        return profileRepository.findById(id).orElseThrow(ProfileNotFoundException::new);
+        return profileRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     @Override

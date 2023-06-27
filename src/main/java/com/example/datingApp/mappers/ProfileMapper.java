@@ -9,4 +9,29 @@ import org.mapstruct.MappingConstants;
         GoalMapper.class, HobbyMapper.class, PetAttitudeMapper.class,
         SmokingAttitudeMapper.class, SportAttitudeMapper.class, AlcoholAttitudeMapper.class})
 public interface ProfileMapper extends CommonMapper<ProfileDto, Profile>{
+    @Override
+    @Mapping(source = "user", target = "userDto")
+    @Mapping(source = "city", target = "cityDto")
+    @Mapping(source = "country", target = "countryDto")
+    @Mapping(source = "goal", target = "goalDto")
+    @Mapping(source = "hobbies", target = "hobbyDtoList")
+    @Mapping(source = "sportAttitude", target = "sportAttitudeDto")
+    @Mapping(source = "alcoholAttitude", target = "alcoholAttitudeDto")
+    @Mapping(source = "smokingAttitude", target = "smokingAttitudeDto")
+    @Mapping(source = "petAttitude", target = "petAttitudeDto")
+    @Mapping(source = "zodiacSign", target = "zodiacSignDto")
+    ProfileDto toDto(Profile entity);
+
+    @Override
+    @Mapping(source = "userDto", target = "user")
+    @Mapping(source = "cityDto", target = "city")
+    @Mapping(source = "countryDto", target = "country")
+    @Mapping(source = "goalDto", target = "goal")
+    @Mapping(source = "hobbyDtoList", target = "hobbies")
+    @Mapping(source = "sportAttitudeDto", target = "sportAttitude")
+    @Mapping(source = "alcoholAttitudeDto", target = "alcoholAttitude")
+    @Mapping(source = "smokingAttitudeDto", target = "smokingAttitude")
+    @Mapping(source = "petAttitudeDto", target = "petAttitude")
+    @Mapping(source = "zodiacSignDto", target = "zodiacSign")
+    Profile toEntity(ProfileDto entity);
 }

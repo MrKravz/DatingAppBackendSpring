@@ -2,6 +2,7 @@ package com.example.datingApp.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -10,15 +11,9 @@ import java.util.List;
 @Table(name = "profiles")
 public class Profile {
     @Id
-    @Column
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "height")
-    private int height;
-
-    @Column(name = "about")
-    private String about;
 
     @OneToOne
     @JoinColumn(
@@ -26,6 +21,18 @@ public class Profile {
             referencedColumnName = "id"
     )
     private User user;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(name = "height")
+    private int height;
+
+    @Column(name = "about")
+    private String about;
+
+
 
     @ManyToOne
     @JoinColumn(
@@ -90,4 +97,8 @@ public class Profile {
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
     private List<Hobby> hobbies;
+
+    @OneToMany(mappedBy = "profile")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Pictures> pictures;
 }

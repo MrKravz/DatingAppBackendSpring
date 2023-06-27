@@ -1,4 +1,4 @@
-package com.example.datingApp.services;
+package com.example.datingApp.services.crud;
 
 import java.util.List;
 

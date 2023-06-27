@@ -1,4 +1,4 @@
-package com.example.datingApp.services;
+package com.example.datingApp.services.crud;
 
 import com.example.datingApp.exceptions.UserNotFoundException;
 import com.example.datingApp.models.User;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class UserService implements CrudService<User>{
+public class UserService implements CrudService<User> {
 
     private final UserRepository userRepository;
 
@@ -23,7 +23,7 @@ public class UserService implements CrudService<User>{
 
     @Override
     public User findById(int id) {
-        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        return userRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UserService implements CrudService<User>{
         userToUpdate.setAge(entity.getAge());
         userToUpdate.setEmail(entity.getEmail());
         userToUpdate.setPassword(entity.getPassword());
-        return userRepository.save(entity);
+        return userRepository.save(userToUpdate);
     }
 
     @Override

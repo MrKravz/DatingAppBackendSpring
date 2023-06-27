@@ -1,13 +1,11 @@
 package com.example.datingApp.mappers;
 
-import java.util.List;
-
 public interface CommonMapper<D, E> {
     D toDto(E entity);
 
     E toEntity(D dto);
 
-    List<D> toListDto(List<E> entityList);
+    Iterable<D> toIterableDto(Iterable<E> entityList);
 
-    List<E> toListEntity(List<D> dtoList);
+    Iterable<E> toIterableEntity(Iterable<D> dtoList);
 }

@@ -16,6 +16,13 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "country_id",
+            referencedColumnName = "id"
+    )
+    private Country country;
+
     @Column(name = "name_of_city")
     private String name;
 

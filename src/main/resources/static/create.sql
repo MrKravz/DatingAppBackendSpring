@@ -1,6 +1,7 @@
+DROP TABLE IF EXISTS preferences;
 DROP TABLE IF EXISTS users_roles;
 DROP TABLE IF EXISTS profiles_pics;
-DROP TABLE IF EXISTS profiles_interests;
+DROP TABLE IF EXISTS profiles_hobbies;
 DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
@@ -18,7 +19,7 @@ CREATE TABLE users
 (
     id       INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name     VARCHAR(50) NOT NULL,
-    age      DATE        NOT NULL,
+    age      INT         NOT NULL,
     email    VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL
 );
@@ -76,6 +77,7 @@ CREATE TABLE profiles
 (
     id                  INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id             INT REFERENCES users (id)             NOT NULL UNIQUE,
+    gender              VARCHAR(10),
     height              INT,
     about               VARCHAR(500),
     zodiac_sign_id      INT REFERENCES zodiac_signs (id)      NOT NULL,
@@ -87,7 +89,7 @@ CREATE TABLE profiles
     sport_attitude_id   INT REFERENCES sport_attitudes (id)   NOT NULL,
     pet_attitude_id     INT REFERENCES pet_attitudes (id)     NOT NULL
 );
-CREATE TABLE profiles_interests
+CREATE TABLE profiles_hobbies
 (
     id         INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     profile_id INT REFERENCES profiles (id) NOT NULL,
@@ -104,4 +106,11 @@ CREATE TABLE users_roles
     id      INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id INT REFERENCES users (id) NOT NULL,
     role_id INT REFERENCES roles (id) NOT NULL
+);
+CREATE TABLE preferences
+(
+    id          INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id     INT REFERENCES users (id) NOT NULL,
+    min_age_gap INT                       NOT NULL,
+    max_age_gap INT                       NOT NULL
 );

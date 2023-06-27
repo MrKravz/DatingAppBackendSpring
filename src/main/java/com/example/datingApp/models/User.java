@@ -41,4 +41,8 @@ public class User {
     @OneToOne(mappedBy = "user")
     @ToString.Exclude
     private Profile profile;
+
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private Preference preference;
 }

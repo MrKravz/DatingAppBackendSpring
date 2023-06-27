@@ -21,5 +21,10 @@ public class Country {
     @OneToMany(mappedBy = "country")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
+    private List<City> cities;
+
+    @OneToMany(mappedBy = "country")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ToString.Exclude
     private List<Profile> profiles;
 }
