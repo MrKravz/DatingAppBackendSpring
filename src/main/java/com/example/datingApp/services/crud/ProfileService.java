@@ -1,6 +1,5 @@
 package com.example.datingApp.services.crud;
 
-import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.repositories.ProfileRepository;
 import lombok.AllArgsConstructor;
@@ -53,5 +52,9 @@ public class ProfileService implements CrudService<Profile> {
     @Transactional
     public void delete(int id) {
         profileRepository.deleteById(id);
+    }
+
+    public Profile findByName(String name) {
+        return profileRepository.findByUserName(name);
     }
 }

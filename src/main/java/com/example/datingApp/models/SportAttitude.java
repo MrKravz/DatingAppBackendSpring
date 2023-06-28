@@ -18,7 +18,7 @@ public class SportAttitude {
     @Column(name = "name_of_sport_attitude")
     private String name;
 
-    @OneToMany(mappedBy = "sportAttitude")
+    @OneToMany(mappedBy = "sportAttitude", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;

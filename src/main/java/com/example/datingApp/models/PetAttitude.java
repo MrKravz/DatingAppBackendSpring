@@ -19,7 +19,7 @@ public class PetAttitude {
     @Column(name = "name_of_pet_attitude")
     private String name;
 
-    @OneToMany(mappedBy = "petAttitude")
+    @OneToMany(mappedBy = "petAttitude", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;

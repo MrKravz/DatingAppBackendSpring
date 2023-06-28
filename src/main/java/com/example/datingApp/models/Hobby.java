@@ -19,7 +19,7 @@ public class Hobby {
     @Column(name = "name_of_hobby")
     private String name;
 
-    @ManyToMany(mappedBy = "hobbies")
+    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;

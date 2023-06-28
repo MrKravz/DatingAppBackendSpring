@@ -40,11 +40,11 @@ public class ProfileController {
     }
 
     @GetMapping("/{profile_id}")
-    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("profile_id") int profile_id){
+    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("profile_id") int profile_id, @PathVariable("id") int id){
         return new ResponseEntity<>(profileMapper.toDto(profileService.findById(profile_id)), HttpStatus.OK);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(ProfileNotFoundException.class)
     private ResponseEntity<ProfileErrorResponse> handleException(ProfileNotFoundException ex){
         return new ResponseEntity<>(
                 new ProfileErrorResponse("Profile with this id does not exist", System.currentTimeMillis()),

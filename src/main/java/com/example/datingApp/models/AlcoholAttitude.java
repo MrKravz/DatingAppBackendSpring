@@ -19,7 +19,7 @@ public class AlcoholAttitude {
     @Column(name = "name_of_alcohol_attitude")
     private String name;
 
-    @OneToMany(mappedBy = "alcoholAttitude")
+    @OneToMany(mappedBy = "alcoholAttitude", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;

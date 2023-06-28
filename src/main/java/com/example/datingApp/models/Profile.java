@@ -22,7 +22,7 @@ public class Profile {
     )
     private User user;
 
-    @Column
+    @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -31,8 +31,6 @@ public class Profile {
 
     @Column(name = "about")
     private String about;
-
-
 
     @ManyToOne
     @JoinColumn(
@@ -90,7 +88,7 @@ public class Profile {
     )
     private PetAttitude petAttitude;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "profiles_hobbies",
             joinColumns = @JoinColumn(name = "profile_id"),
@@ -98,7 +96,7 @@ public class Profile {
     )
     private List<Hobby> hobbies;
 
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Pictures> pictures;
 }

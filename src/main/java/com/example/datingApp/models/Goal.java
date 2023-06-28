@@ -19,7 +19,7 @@ public class Goal {
     @Column(name = "name_of_goal")
     private String name;
 
-    @OneToMany(mappedBy = "goal")
+    @OneToMany(mappedBy = "goal", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;

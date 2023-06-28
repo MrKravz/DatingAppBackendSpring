@@ -18,7 +18,7 @@ public class ZodiacSign {
     @Column(name = "name_of_zodiac_sign")
     private String name;
 
-    @OneToMany(mappedBy = "zodiacSign")
+    @OneToMany(mappedBy = "zodiacSign", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;

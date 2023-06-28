@@ -18,7 +18,7 @@ public class SmokingAttitude {
     @Column(name = "name_of_smoking_attitude")
     private String name;
 
-    @OneToMany(mappedBy = "smokingAttitude")
+    @OneToMany(mappedBy = "smokingAttitude", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
     private List<Profile> profiles;
