@@ -3,7 +3,7 @@ package com.example.datingApp.services.dto;
 import com.example.datingApp.dtos.PetAttitudeDto;
 import com.example.datingApp.mappers.PetAttitudeMapper;
 import com.example.datingApp.models.PetAttitude;
-import com.example.datingApp.services.crud.PetAttitudeService;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PetAttitudeDtoService implements DtoProviderService<PetAttitudeDto, PetAttitude> {
 
-    private final PetAttitudeService petAttitudeService;
+    private final CrudService<PetAttitude> petAttitudeService;
 
     private final PetAttitudeMapper petAttitudeMapper;
 

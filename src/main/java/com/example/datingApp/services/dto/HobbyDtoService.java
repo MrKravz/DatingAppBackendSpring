@@ -3,7 +3,7 @@ package com.example.datingApp.services.dto;
 import com.example.datingApp.dtos.HobbyDto;
 import com.example.datingApp.mappers.HobbyMapper;
 import com.example.datingApp.models.Hobby;
-import com.example.datingApp.services.crud.HobbyService;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class HobbyDtoService implements DtoProviderService<HobbyDto, Hobby> {
 
-    private final HobbyService hobbyService;
+    private final CrudService<Hobby> hobbyService;
 
     private final HobbyMapper hobbyMapper;
 

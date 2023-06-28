@@ -3,7 +3,7 @@ package com.example.datingApp.services.dto;
 import com.example.datingApp.dtos.CityDto;
 import com.example.datingApp.mappers.CityMapper;
 import com.example.datingApp.models.City;
-import com.example.datingApp.services.crud.CityService;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CityDtoService implements DtoProviderService<CityDto, City> {
 
-    private final CityService cityService;
+    private final CrudService<City> cityService;
 
     private final CityMapper cityMapper;
 

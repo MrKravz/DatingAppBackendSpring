@@ -3,8 +3,8 @@ package com.example.datingApp.services;
 import com.example.datingApp.exceptions.ProfilesNotFoundException;
 import com.example.datingApp.models.City;
 import com.example.datingApp.models.Profile;
-import com.example.datingApp.services.crud.ProfileService;
-import com.example.datingApp.services.crud.UserService;
+import com.example.datingApp.models.User;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProfileSwipeService {
 
-    private final ProfileService profileService;
-    private final UserService userService;
+    private final CrudService<Profile> profileService;
+    private final CrudService<User> userService;
     private List<Profile> swipeList;
 
     public List<Profile> getSwipeList(int userId) {

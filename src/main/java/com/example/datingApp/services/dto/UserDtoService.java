@@ -3,7 +3,7 @@ package com.example.datingApp.services.dto;
 import com.example.datingApp.dtos.UserDto;
 import com.example.datingApp.mappers.UserMapper;
 import com.example.datingApp.models.User;
-import com.example.datingApp.services.crud.UserService;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserDtoService implements DtoProviderService<UserDto, User> {
-    private final UserService userService;
+    private final CrudService<User> userService;
     private final UserMapper userMapper;
 
     @Override

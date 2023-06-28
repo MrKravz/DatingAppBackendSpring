@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.*;
+import com.example.datingApp.models.*;
 import com.example.datingApp.services.dto.*;
 import com.example.datingApp.util.ProfileModel;
 import lombok.AllArgsConstructor;
@@ -12,25 +13,25 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class ProfileModelService {
 
-    private final AlcoholAttitudeDtoService alcoholAttitudeDtoService;
+    private final DtoProviderService<AlcoholAttitudeDto, AlcoholAttitude> alcoholAttitudeDtoService;
 
-    private final CityDtoService cityDtoService;
+    private final DtoProviderService<CityDto, City> cityDtoService;
 
-    private final CountryDtoService countryDtoService;
+    private final DtoProviderService<CountryDto, Country> countryDtoService;
 
-    private final GoalDtoService goalDtoService;
+    private final DtoProviderService<GoalDto, Goal> goalDtoService;
 
-    private final HobbyDtoService hobbyDtoService;
+    private final DtoProviderService<HobbyDto, Hobby> hobbyDtoService;
 
-    private final PetAttitudeDtoService petAttitudeDtoService;
+    private final DtoProviderService<PetAttitudeDto, PetAttitude> petAttitudeDtoService;
 
-    private final UserDtoService userDtoService;
+    private final DtoProviderService<UserDto, User> userDtoService;
 
-    private final SmokingAttitudeDtoService smokingAttitudeDtoService;
+    private final DtoProviderService<SmokingAttitudeDto, SmokingAttitude> smokingAttitudeDtoService;
 
-    private final SportAttitudeDtoService sportAttitudeDtoService;
+    private final DtoProviderService<SportAttitudeDto, SportAttitude> sportAttitudeDtoService;
 
-    private final ZodiacSignDtoService zodiacSignDtoService;
+    private final DtoProviderService<ZodiacSignDto, ZodiacSign> zodiacSignDtoService;
 
     public ProfileModel configureModel(int userId)
     {

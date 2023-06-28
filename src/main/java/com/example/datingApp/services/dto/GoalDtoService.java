@@ -3,7 +3,7 @@ package com.example.datingApp.services.dto;
 import com.example.datingApp.dtos.GoalDto;
 import com.example.datingApp.mappers.GoalMapper;
 import com.example.datingApp.models.Goal;
-import com.example.datingApp.services.crud.GoalService;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GoalDtoService implements DtoProviderService<GoalDto, Goal> {
-    private final GoalService goalService;
+    private final CrudService<Goal> goalService;
 
     private final GoalMapper goalMapper;
 

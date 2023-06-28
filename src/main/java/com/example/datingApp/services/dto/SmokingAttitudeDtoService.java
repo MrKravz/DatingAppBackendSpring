@@ -3,7 +3,7 @@ package com.example.datingApp.services.dto;
 import com.example.datingApp.dtos.SmokingAttitudeDto;
 import com.example.datingApp.mappers.SmokingAttitudeMapper;
 import com.example.datingApp.models.SmokingAttitude;
-import com.example.datingApp.services.crud.SmokingAttitudeService;
+import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SmokingAttitudeDtoService implements DtoProviderService<SmokingAttitudeDto, SmokingAttitude> {
 
-    private final SmokingAttitudeService smokingAttitudeService;
+    private final CrudService<SmokingAttitude> smokingAttitudeService;
 
     private final SmokingAttitudeMapper smokingAttitudeMapper;
 

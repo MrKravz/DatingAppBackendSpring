@@ -4,8 +4,9 @@ import com.example.datingApp.dtos.ProfileDto;
 import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.exceptions.errorResponses.ProfileErrorResponse;
 import com.example.datingApp.mappers.ProfileMapper;
+import com.example.datingApp.models.Profile;
 import com.example.datingApp.services.ProfileModelService;
-import com.example.datingApp.services.crud.ProfileService;
+import com.example.datingApp.services.crud.CrudService;
 import com.example.datingApp.util.ProfileModel;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
@@ -15,11 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("user/{id}/profile")
 @AllArgsConstructor
 public class ProfileController {
-
-    private final ProfileService profileService;
-
+    private final CrudService<Profile> profileService;
     private final ProfileModelService profileModelService;
-
     private final ProfileMapper profileMapper;
 
     @GetMapping("/new")
