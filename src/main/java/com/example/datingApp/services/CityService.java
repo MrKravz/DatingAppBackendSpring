@@ -1,6 +1,7 @@
-package com.example.datingApp.services.crud;
+package com.example.datingApp.services;
 
-import com.example.datingApp.exceptions.UserNotFoundException;
+import com.example.datingApp.dtos.CityDto;
+import com.example.datingApp.mappers.CityMapper;
 import com.example.datingApp.models.City;
 import com.example.datingApp.repositories.CityRepository;
 import lombok.AllArgsConstructor;
@@ -11,8 +12,10 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class CityService implements CrudService<City> {
+public class CityService implements CrudService<City>, DtoService<CityDto, City> {
+
     private final CityRepository cityRepository;
+    private final CityMapper cityMapper;
 
     @Override
     public List<City> findAll() {
@@ -42,5 +45,25 @@ public class CityService implements CrudService<City> {
     @Transactional
     public void delete(int id) {
         cityRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CityDto> findAllDto() {
+        return cityMapper.toIterableDto(findAll());
+    }
+
+    @Override
+    public CityDto findDtoById(int id) {
+        return cityMapper.toDto(findById(id));
+    }
+
+    @Override
+    public City saveDto(CityDto dto) {
+        return save(cityMapper.toEntity(dto));
+    }
+
+    @Override
+    public City updateDto(CityDto dto, int id) {
+        return update(cityMapper.toEntity(dto), id);
     }
 }

@@ -1,19 +1,19 @@
 package com.example.datingApp.servicesTests;
 
 import com.example.datingApp.exceptions.ProfileNotFoundException;
-import com.example.datingApp.services.crud.ProfileService;
+import com.example.datingApp.models.Profile;
+import com.example.datingApp.services.CrudService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 public class ProfileServiceTest {
 
     @Autowired
-    private ProfileService profileService;
+    private CrudService<Profile> profileService;
 
     @Test
     void findAllProfilesTest()
@@ -24,15 +24,13 @@ public class ProfileServiceTest {
     @Test
     void findAllByExistingIdTest()
     {
-        assertTrue(profileService.findById(1) != null);
+        assertNotNull(profileService.findById(1));
     }
 
     @Test
     void findAllByNotExistingIdTest()
     {
-        assertThrows(ProfileNotFoundException.class,() -> {
-            profileService.findById(-1);
-        });
+        assertThrows(ProfileNotFoundException.class,() -> profileService.findById(-1));
     }
 
     @Test

@@ -1,6 +1,7 @@
-package com.example.datingApp.services.crud;
+package com.example.datingApp.services;
 
-import com.example.datingApp.exceptions.UserNotFoundException;
+import com.example.datingApp.dtos.GoalDto;
+import com.example.datingApp.mappers.GoalMapper;
 import com.example.datingApp.models.Goal;
 import com.example.datingApp.repositories.GoalRepository;
 import lombok.AllArgsConstructor;
@@ -12,9 +13,10 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class GoalService implements CrudService<Goal> {
+public class GoalService implements CrudService<Goal>, DtoService<GoalDto, Goal> {
 
     private final GoalRepository goalRepository;
+    private final GoalMapper goalMapper;
 
     @Override
     public List<Goal> findAll() {
@@ -45,4 +47,25 @@ public class GoalService implements CrudService<Goal> {
     public void delete(int id) {
         goalRepository.deleteById(id);
     }
+
+    @Override
+    public List<GoalDto> findAllDto() {
+        return goalMapper.toIterableDto(findAll());
+    }
+
+    @Override
+    public GoalDto findDtoById(int id) {
+        return goalMapper.toDto(findById(id));
+    }
+
+    @Override
+    public Goal saveDto(GoalDto dto) {
+        return save(goalMapper.toEntity(dto));
+    }
+
+    @Override
+    public Goal updateDto(GoalDto dto, int id) {
+        return update(goalMapper.toEntity(dto), id);
+    }
+
 }

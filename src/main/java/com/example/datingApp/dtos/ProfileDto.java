@@ -1,8 +1,11 @@
 package com.example.datingApp.dtos;
 
+import com.example.datingApp.models.Gender;
+
 import java.util.List;
 
 public record ProfileDto(int height,
+                         Gender gender,
                          String about,
                          UserDto userDto,
                          CountryDto countryDto,
@@ -14,4 +17,5 @@ public record ProfileDto(int height,
                          SmokingAttitudeDto smokingAttitudeDto,
                          PetAttitudeDto petAttitudeDto,
                          List<HobbyDto> hobbyDtoList) {
+    // TODO change dto
 }

@@ -1,5 +1,7 @@
-package com.example.datingApp.services.crud;
+package com.example.datingApp.services;
 
+import com.example.datingApp.dtos.ProfileDto;
+import com.example.datingApp.mappers.ProfileMapper;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.repositories.ProfileRepository;
 import lombok.AllArgsConstructor;
@@ -11,9 +13,10 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class ProfileService implements CrudService<Profile> {
+public class ProfileService implements CrudService<Profile>, DtoService<ProfileDto, Profile> {
 
     private final ProfileRepository profileRepository;
+    private final ProfileMapper profileMapper;
 
     @Override
     public List<Profile> findAll() {
@@ -56,5 +59,25 @@ public class ProfileService implements CrudService<Profile> {
 
     public Profile findByName(String name) {
         return profileRepository.findByUserName(name);
+    }
+
+    @Override
+    public List<ProfileDto> findAllDto() {
+        return profileMapper.toIterableDto(findAll());
+    }
+
+    @Override
+    public ProfileDto findDtoById(int id) {
+        return profileMapper.toDto(findById(id));
+    }
+
+    @Override
+    public Profile saveDto(ProfileDto dto) {
+        return save(profileMapper.toEntity(dto));
+    }
+
+    @Override
+    public Profile updateDto(ProfileDto dto, int id) {
+        return update(profileMapper.toEntity(dto), id);
     }
 }

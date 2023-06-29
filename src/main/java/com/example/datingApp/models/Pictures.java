@@ -18,10 +18,10 @@ public class Pictures {
     private byte[] picture;
 
     @ManyToOne
-    @JoinTable(
-            name = "profiles_pics",
-            joinColumns = @JoinColumn(name = "profile_id")
+    @JoinColumn(
+            name = "profile_id",
+            referencedColumnName = "id"
     )
     @ToString.Exclude
-    private Profile profiles;
+    private Profile profile;
 }

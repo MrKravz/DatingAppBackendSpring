@@ -1,6 +1,7 @@
-package com.example.datingApp.services.crud;
+package com.example.datingApp.services;
 
-import com.example.datingApp.exceptions.UserNotFoundException;
+import com.example.datingApp.dtos.UserDto;
+import com.example.datingApp.mappers.UserMapper;
 import com.example.datingApp.models.User;
 import com.example.datingApp.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -12,9 +13,10 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class UserService implements CrudService<User> {
+public class UserService implements CrudService<User>, DtoService<UserDto, User> {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public List<User> findAll() {
@@ -47,5 +49,25 @@ public class UserService implements CrudService<User> {
     @Transactional
     public void delete(int id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserDto> findAllDto() {
+        return userMapper.toIterableDto(findAll());
+    }
+
+    @Override
+    public UserDto findDtoById(int id) {
+        return userMapper.toDto(findById(id));
+    }
+
+    @Override
+    public User saveDto(UserDto dto) {
+        return save(userMapper.toEntity(dto));
+    }
+
+    @Override
+    public User updateDto(UserDto dto, int id) {
+        return update(userMapper.toEntity(dto), id);
     }
 }

@@ -5,7 +5,6 @@ import com.example.datingApp.exceptions.ProfilesNotFoundException;
 import com.example.datingApp.exceptions.errorResponses.ProfilesErrorResponse;
 import com.example.datingApp.mappers.ProfileMapper;
 import com.example.datingApp.services.*;
-import com.example.datingApp.services.crud.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +16,13 @@ import java.util.List;
 @RequestMapping("user/{id}")
 @AllArgsConstructor
 public class SwipeController {
+
     private final ProfileSwipeService profileSwipeService;
-    private final ProfileService profileService;
     private final ProfileMapper profileMapper;
 
     @GetMapping
     public ResponseEntity<List<ProfileDto>> getProfiles(@PathVariable("id") int id){
-        return new ResponseEntity<>((List<ProfileDto>) profileMapper.toIterableDto(profileSwipeService.getSwipeList(id)), HttpStatus.OK);
+        return new ResponseEntity<>(profileMapper.toIterableDto(profileSwipeService.getSwipeList(id)), HttpStatus.OK);
     }
 
     @ExceptionHandler(ProfilesNotFoundException.class)
@@ -35,8 +34,7 @@ public class SwipeController {
 
     @PostMapping
     public ResponseEntity<HttpStatus> likeProfile(@PathVariable("id") int id, @RequestBody ProfileDto profileDto){
-        var userId = profileService.findByName(profileDto.userDto().name()).getUser().getId();
-        profileSwipeService.likeUser(id, userId);
+        profileSwipeService.likeUser(id, profileDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

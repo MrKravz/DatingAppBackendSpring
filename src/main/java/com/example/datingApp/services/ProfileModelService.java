@@ -2,7 +2,6 @@ package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.*;
 import com.example.datingApp.models.*;
-import com.example.datingApp.services.dto.*;
 import com.example.datingApp.util.ProfileModel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,38 +12,29 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class ProfileModelService {
 
-    private final DtoProviderService<AlcoholAttitudeDto, AlcoholAttitude> alcoholAttitudeDtoService;
-
-    private final DtoProviderService<CityDto, City> cityDtoService;
-
-    private final DtoProviderService<CountryDto, Country> countryDtoService;
-
-    private final DtoProviderService<GoalDto, Goal> goalDtoService;
-
-    private final DtoProviderService<HobbyDto, Hobby> hobbyDtoService;
-
-    private final DtoProviderService<PetAttitudeDto, PetAttitude> petAttitudeDtoService;
-
-    private final DtoProviderService<UserDto, User> userDtoService;
-
-    private final DtoProviderService<SmokingAttitudeDto, SmokingAttitude> smokingAttitudeDtoService;
-
-    private final DtoProviderService<SportAttitudeDto, SportAttitude> sportAttitudeDtoService;
-
-    private final DtoProviderService<ZodiacSignDto, ZodiacSign> zodiacSignDtoService;
+    private final DtoService<AlcoholAttitudeDto, AlcoholAttitude> alcoholAttitudeDtoService;
+    private final DtoService<CityDto, City> cityDtoService;
+    private final DtoService<CountryDto, Country> countryDtoService;
+    private final DtoService<GoalDto, Goal> goalDtoService;
+    private final DtoService<HobbyDto, Hobby> hobbyDtoService;
+    private final DtoService<PetAttitudeDto, PetAttitude> petAttitudeDtoService;
+    private final DtoService<UserDto, User> userDtoService;
+    private final DtoService<SmokingAttitudeDto, SmokingAttitude> smokingAttitudeDtoService;
+    private final DtoService<SportAttitudeDto, SportAttitude> sportAttitudeDtoService;
+    private final DtoService<ZodiacSignDto, ZodiacSign> zodiacSignDtoService;
 
     public ProfileModel configureModel(int userId)
     {
-        var user = userDtoService.findById(userId);
-        return new ProfileModel(emptyProfileDto(user), countryDtoService.findAll(), cityDtoService.findAll(),
-                goalDtoService.findAll(), zodiacSignDtoService.findAll(), sportAttitudeDtoService.findAll(),
-                alcoholAttitudeDtoService.findAll(), smokingAttitudeDtoService.findAll(), petAttitudeDtoService.findAll(),
-                hobbyDtoService.findAll());
+        var user = userDtoService.findDtoById(userId);
+        return new ProfileModel(emptyProfileDto(user), countryDtoService.findAllDto(), cityDtoService.findAllDto(),
+                goalDtoService.findAllDto(), zodiacSignDtoService.findAllDto(), sportAttitudeDtoService.findAllDto(),
+                alcoholAttitudeDtoService.findAllDto(), smokingAttitudeDtoService.findAllDto(), petAttitudeDtoService.findAllDto(),
+                hobbyDtoService.findAllDto());
     }
 
     private ProfileDto emptyProfileDto(UserDto userDto)
     {
-        return new ProfileDto(0,"", userDto,
+        return new ProfileDto(0, null, "", userDto,
                 null, null, null,
                 null, null, null,
                 null, null,null);

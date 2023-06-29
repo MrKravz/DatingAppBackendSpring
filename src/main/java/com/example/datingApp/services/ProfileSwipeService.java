@@ -1,10 +1,11 @@
 package com.example.datingApp.services;
 
+import com.example.datingApp.dtos.ProfileDto;
 import com.example.datingApp.exceptions.ProfilesNotFoundException;
+import com.example.datingApp.mappers.UserMapper;
 import com.example.datingApp.models.City;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.models.User;
-import com.example.datingApp.services.crud.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class ProfileSwipeService {
 
     private final CrudService<Profile> profileService;
     private final CrudService<User> userService;
+    private final UserMapper userMapper;
     private List<Profile> swipeList;
 
     public List<Profile> getSwipeList(int userId) {
@@ -42,14 +44,12 @@ public class ProfileSwipeService {
         return swipeList;
     }
 
-    public boolean likeUser(int likeProviderUserId, int likeReceiverUserId) {
-        var providerUser = userService.findById(likeProviderUserId);
-        var receiverUser = userService.findById(likeReceiverUserId);
-        var likeProviders = receiverUser.getLikeProviders();
+    public boolean likeUser(int likeProviderUserId, ProfileDto profileDto) {
+        var providerUser = userMapper.toDto(userService.findById(likeProviderUserId));
+        var receiverUser = profileDto.userDto();
+        var likeProviders = receiverUser.likeProviders();
         likeProviders.add(providerUser);
-        return providerUser.getLikeProviders()
-                .stream()
-                .anyMatch(x->x.getId() == receiverUser.getId());
+        return providerUser.likeProviders().contains(receiverUser);
     }
 
     private int compareCities(City city, City city1) {

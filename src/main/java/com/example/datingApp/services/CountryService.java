@@ -1,6 +1,7 @@
-package com.example.datingApp.services.crud;
+package com.example.datingApp.services;
 
-import com.example.datingApp.exceptions.UserNotFoundException;
+import com.example.datingApp.dtos.CountryDto;
+import com.example.datingApp.mappers.CountryMapper;
 import com.example.datingApp.models.Country;
 import com.example.datingApp.repositories.CountryRepository;
 import lombok.AllArgsConstructor;
@@ -12,9 +13,11 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class CountryService implements CrudService<Country> {
+public class CountryService implements CrudService<Country>, DtoService<CountryDto, Country> {
 
     private final CountryRepository countryRepository;
+
+    private final CountryMapper countryMapper;
 
     @Override
     public List<Country> findAll() {
@@ -44,5 +47,25 @@ public class CountryService implements CrudService<Country> {
     @Transactional
     public void delete(int id) {
         countryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CountryDto> findAllDto() {
+        return countryMapper.toIterableDto(findAll());
+    }
+
+    @Override
+    public CountryDto findDtoById(int id) {
+        return countryMapper.toDto(findById(id));
+    }
+
+    @Override
+    public Country saveDto(CountryDto dto) {
+        return save(countryMapper.toEntity(dto));
+    }
+
+    @Override
+    public Country updateDto(CountryDto dto, int id) {
+        return update(countryMapper.toEntity(dto), id);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.datingApp.dtos;
 
-import java.util.Date;
+import java.util.List;
 
-public record UserDto(String name, Date age, String email) {
+public record UserDto(String name, int age, String email, List<UserDto> likeProviders) {
 }
