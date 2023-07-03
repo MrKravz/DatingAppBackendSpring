@@ -1,4 +1,4 @@
 package com.example.datingApp.dtos;
 
-public record CountryDto(String name) {
+public record CountryDto(int id, String name) {
 }

@@ -3,6 +3,7 @@ package com.example.datingApp.mappersTests;
 import com.example.datingApp.dtos.ProfileDto;
 import com.example.datingApp.dtos.UserDto;
 import com.example.datingApp.mappers.ProfileMapper;
+import com.example.datingApp.models.Gender;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.models.User;
 import org.junit.jupiter.api.Test;
@@ -10,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -28,18 +30,18 @@ public class ProfileMapperTest {
         Profile profile = new Profile();
         profile.setUser(user);
         ProfileDto profileDto = profileMapper.toDto(profile);
-        assertTrue(profileDto.userDto().name() == profile.getUser().getName());
+        assertSame(profileDto.userDto().name(), profile.getUser().getName());
     }
 
     @Test
     public void profileDtoToEntityTest() {
-        UserDto userDto = new UserDto("TestUser", new Date(System.currentTimeMillis()), "test@email.com");
-        ProfileDto profileDto = new ProfileDto(0,"",userDto,
+        UserDto userDto = new UserDto(0,"TestUser", 12, "test@email.com", Collections.emptyList());
+        ProfileDto profileDto = new ProfileDto(0,0, Gender.Male,"",userDto,
                 null, null, null,
                 null, null, null,
                 null, null,null);
         Profile profile = profileMapper.toEntity(profileDto);
-        assertTrue(profileDto.userDto().name() == profile.getUser().getName());
+        assertSame(profileDto.userDto().name(), profile.getUser().getName());
     }
 
     @Test
@@ -55,28 +57,28 @@ public class ProfileMapperTest {
         List<Profile> profileList = new ArrayList<>();
         profileList.add(firstProfile);
         profileList.add(secondProfile);
-        List<ProfileDto> profileDtoList = (List<ProfileDto>) profileMapper.toIterableDto(profileList);
-        assertTrue(profileDtoList.get(0).userDto().name() == profileList.get(0).getUser().getName());
-        assertTrue(profileDtoList.get(1).userDto().name() == profileList.get(1).getUser().getName());
+        List<ProfileDto> profileDtoList = profileMapper.toIterableDto(profileList);
+        assertSame(profileDtoList.get(0).userDto().name(), profileList.get(0).getUser().getName());
+        assertSame(profileDtoList.get(1).userDto().name(), profileList.get(1).getUser().getName());
     }
 
     @Test
     public void profileDtoListToEntityListTest() {
-        UserDto firstUserDto = new UserDto("TestUser1", new Date(System.currentTimeMillis()), "test1@email.com");
-        ProfileDto firstProfileDto = new ProfileDto(0,"",firstUserDto,
+        UserDto firstUserDto = new UserDto(0,"TestUser1",12, "test1@email.com", Collections.emptyList());
+        ProfileDto firstProfileDto = new ProfileDto(0,0,Gender.Female,"",firstUserDto,
                 null, null, null,
                 null, null, null,
                 null, null,null);
-        UserDto secondUserDto = new UserDto("TestUser2", new Date(System.currentTimeMillis()), "test2@email.com");
-        ProfileDto secondProfileDto = new ProfileDto(0,"",secondUserDto,
+        UserDto secondUserDto = new UserDto(1,"TestUser2", 13, "test2@email.com", Collections.emptyList());
+        ProfileDto secondProfileDto = new ProfileDto(1,0,Gender.Male,"",secondUserDto,
                 null, null, null,
                 null, null, null,
                 null, null,null);
         List<ProfileDto> profileDtoList = new ArrayList<>();
         profileDtoList.add(firstProfileDto);
         profileDtoList.add(secondProfileDto);
-        List<Profile> profileList = (List<Profile>) profileMapper.toIterableEntity(profileDtoList);
-        assertTrue(profileDtoList.get(0).userDto().name() == profileList.get(0).getUser().getName());
-        assertTrue(profileDtoList.get(1).userDto().name() == profileList.get(1).getUser().getName());
+        List<Profile> profileList = profileMapper.toIterableEntity(profileDtoList);
+        assertSame(profileDtoList.get(0).userDto().name(), profileList.get(0).getUser().getName());
+        assertSame(profileDtoList.get(1).userDto().name(), profileList.get(1).getUser().getName());
     }
 }

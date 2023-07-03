@@ -5,7 +5,7 @@ import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.exceptions.errorResponses.ProfileErrorResponse;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.services.DtoService;
-import com.example.datingApp.services.ProfileModelService;
+import com.example.datingApp.services.ProfileModelProviderService;
 import com.example.datingApp.util.ProfileModel;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
 
     private final DtoService<ProfileDto, Profile> profileService;
-    private final ProfileModelService profileModelService;
+    private final ProfileModelProviderService profileModelProviderService;
 
     @GetMapping("/new")
     public ResponseEntity<ProfileModel> newProfile(@PathVariable("id") int id){
-        return new ResponseEntity<>(profileModelService.configureModel(id), HttpStatus.OK);
+        return new ResponseEntity<>(profileModelProviderService.configureProfileModel(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -37,14 +37,14 @@ public class ProfileController {
     }
 
     @GetMapping("/{profile_id}")
-    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("profile_id") int profile_id, @PathVariable("id") int id){
+    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("profile_id") int profile_id){
         return new ResponseEntity<>(profileService.findDtoById(profile_id), HttpStatus.OK);
     }
 
     @ExceptionHandler(ProfileNotFoundException.class)
     private ResponseEntity<ProfileErrorResponse> handleException(ProfileNotFoundException ex){
         return new ResponseEntity<>(
-                new ProfileErrorResponse("Profile with this id does not exist", System.currentTimeMillis()),
+                new ProfileErrorResponse(ex.getMessage(), System.currentTimeMillis()),
                 HttpStatus.NOT_FOUND);
     }
 }

@@ -1,4 +1,4 @@
 package com.example.datingApp.dtos;
 
-public record PetAttitudeDto(String name) {
+public record PetAttitudeDto(int id, String name) {
 }

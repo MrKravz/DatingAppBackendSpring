@@ -57,10 +57,6 @@ public class ProfileService implements CrudService<Profile>, DtoService<ProfileD
         profileRepository.deleteById(id);
     }
 
-    public Profile findByName(String name) {
-        return profileRepository.findByUserName(name);
-    }
-
     @Override
     public List<ProfileDto> findAllDto() {
         return profileMapper.toIterableDto(findAll());
@@ -72,11 +68,13 @@ public class ProfileService implements CrudService<Profile>, DtoService<ProfileD
     }
 
     @Override
+    @Transactional
     public Profile saveDto(ProfileDto dto) {
         return save(profileMapper.toEntity(dto));
     }
 
     @Override
+    @Transactional
     public Profile updateDto(ProfileDto dto, int id) {
         return update(profileMapper.toEntity(dto), id);
     }

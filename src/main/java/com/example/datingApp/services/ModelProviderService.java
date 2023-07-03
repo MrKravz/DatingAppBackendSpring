@@ -7,10 +7,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class ProfileModelService {
+public class ModelProviderService implements UserModelProviderService, ProfileModelProviderService {
 
     private final DtoService<AlcoholAttitudeDto, AlcoholAttitude> alcoholAttitudeDtoService;
     private final DtoService<CityDto, City> cityDtoService;
@@ -23,7 +25,8 @@ public class ProfileModelService {
     private final DtoService<SportAttitudeDto, SportAttitude> sportAttitudeDtoService;
     private final DtoService<ZodiacSignDto, ZodiacSign> zodiacSignDtoService;
 
-    public ProfileModel configureModel(int userId)
+    @Override
+    public ProfileModel configureProfileModel(int userId)
     {
         var user = userDtoService.findDtoById(userId);
         return new ProfileModel(emptyProfileDto(user), countryDtoService.findAllDto(), cityDtoService.findAllDto(),
@@ -32,9 +35,15 @@ public class ProfileModelService {
                 hobbyDtoService.findAllDto());
     }
 
+    @Override
+    public UserDto configureUserModel()
+    {
+        return new UserDto(0,"",18,"", Collections.emptyList());
+    }
+
     private ProfileDto emptyProfileDto(UserDto userDto)
     {
-        return new ProfileDto(0, null, "", userDto,
+        return new ProfileDto(0,0, null, "", userDto,
                 null, null, null,
                 null, null, null,
                 null, null,null);
