@@ -1,7 +1,6 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.ProfileDto;
-import com.example.datingApp.exceptions.ProfilesNotFoundException;
 import com.example.datingApp.mappers.UserMapper;
 import com.example.datingApp.models.City;
 import com.example.datingApp.models.Profile;
@@ -17,31 +16,23 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProfileSwipeService {
 
-    private final CrudService<Profile> profileService;
+    private final FindByPreferenceService findByPreferenceService;
     private final CrudService<User> userService;
     private final UserMapper userMapper;
-    private List<Profile> swipeList;
 
     public List<Profile> getSwipeList(int userId) {
         var userProfile = userService.findById(userId).getProfile();
         var preference = userProfile.getUser().getPreference();
         var city = userProfile.getCity();
         var country = city.getCountry();
-        var configuredSwipeList = profileService.findAll()
+        return findByPreferenceService.findByAgeGap(preference.getMinAge(),
+                        preference.getMaxAge())
                 .stream()
                 .filter(x -> x.getUser().getId() != userId)
                 .filter(x->x.getGender() != userProfile.getGender())
                 .filter(x->x.getCountry() == country)
-                .filter(x -> x.getUser().getAge() >= preference.getMinAge()
-                        && x.getUser().getAge() <= preference.getMaxAge())
                 .sorted(Comparator.comparing(x-> compareCities(x.getCity(), city)))
                 .collect(Collectors.toList());
-        if (configuredSwipeList == swipeList)
-        {
-            throw new ProfilesNotFoundException();
-        }
-        swipeList = configuredSwipeList;
-        return swipeList;
     }
 
     public boolean likeUser(int likeProviderUserId, ProfileDto profileDto) {

@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class ProfileService implements CrudService<Profile>, DtoService<ProfileDto, Profile> {
+public class ProfileService implements CrudService<Profile>, DtoService<ProfileDto, Profile>, FindByPreferenceService {
 
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
@@ -77,5 +77,10 @@ public class ProfileService implements CrudService<Profile>, DtoService<ProfileD
     @Transactional
     public Profile updateDto(ProfileDto dto, int id) {
         return update(profileMapper.toEntity(dto), id);
+    }
+
+    @Override
+    public List<Profile> findByAgeGap(int minAge, int maxAge) {
+        return profileRepository.findByAgeGap(minAge, maxAge);
     }
 }

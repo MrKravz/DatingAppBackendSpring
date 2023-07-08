@@ -1,7 +1,8 @@
 package com.example.datingApp.models;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Data
 @Entity

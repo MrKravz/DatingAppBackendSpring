@@ -1,9 +1,9 @@
 package com.example.datingApp.models;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
