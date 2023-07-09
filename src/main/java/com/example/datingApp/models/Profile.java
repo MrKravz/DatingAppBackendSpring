@@ -98,5 +98,5 @@ public class Profile {
 
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<Pictures> pictures;
+    private List<Picture> pictures;
 }

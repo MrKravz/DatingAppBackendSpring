@@ -33,8 +33,7 @@ public class SwipeController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> likeProfile(@PathVariable("id") int id, @RequestBody ProfileDto profileDto){
-        profileSwipeService.likeUser(id, profileDto);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<Boolean> likeProfile(@PathVariable("id") int id, @RequestBody ProfileDto profileDto){
+        return new ResponseEntity<>(profileSwipeService.likeUser(id, profileDto), HttpStatus.OK);
     }
 }

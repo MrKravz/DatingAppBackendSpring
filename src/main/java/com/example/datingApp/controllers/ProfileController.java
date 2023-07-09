@@ -7,6 +7,8 @@ import com.example.datingApp.models.Profile;
 import com.example.datingApp.services.DtoService;
 import com.example.datingApp.services.ProfileModelProviderService;
 import com.example.datingApp.util.ProfileModel;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("user/{id}/profile")
 @AllArgsConstructor
+@Api(value = "GGS")
 public class ProfileController {
 
     private final DtoService<ProfileDto, Profile> profileService;
     private final ProfileModelProviderService profileModelProviderService;
 
     @GetMapping("/new")
+    @ApiOperation(value = "GGS1", response = ProfileModel.class)
     public ResponseEntity<ProfileModel> newProfile(@PathVariable("id") int id){
         return new ResponseEntity<>(profileModelProviderService.configureProfileModel(id), HttpStatus.OK);
     }
@@ -31,7 +35,8 @@ public class ProfileController {
     }
 
     @PatchMapping("/{profile_id}")
-    public ResponseEntity<HttpStatus> editProfileInfo(@RequestBody ProfileDto profileDto, @PathVariable("profile_id") int profile_id){
+    public ResponseEntity<HttpStatus> editProfileInfo(@RequestBody ProfileDto profileDto,
+                                                      @PathVariable("profile_id") int profile_id){
         profileService.updateDto(profileDto, profile_id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

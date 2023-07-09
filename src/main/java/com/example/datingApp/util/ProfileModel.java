@@ -1,8 +1,7 @@
 package com.example.datingApp.util;
 
 import com.example.datingApp.dtos.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.ProfileDto;
+import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.mappers.ProfileMapper;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.repositories.ProfileRepository;
@@ -25,7 +26,7 @@ public class ProfileService implements CrudService<Profile>, DtoService<ProfileD
 
     @Override
     public Profile findById(int id) {
-        return profileRepository.findById(id).orElseThrow(RuntimeException::new);
+        return profileRepository.findById(id).orElseThrow(ProfileNotFoundException::new);
     }
 
     @Override
