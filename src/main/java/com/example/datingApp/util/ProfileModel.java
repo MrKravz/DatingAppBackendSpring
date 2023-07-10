@@ -1,12 +1,14 @@
 package com.example.datingApp.util;
 
 import com.example.datingApp.dtos.*;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@ApiModel(value = "Profile creation dto")
 public class ProfileModel {
 
     private ProfileDto profileDto;

@@ -1,19 +1,21 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.models.Picture;
+import com.example.datingApp.models.User;
 import com.example.datingApp.repositories.PictureRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class PictureService implements CrudService<Picture>{
+public class PictureService implements CrudService<Picture>, PictureProviderService {
 
     private final PictureRepository pictureRepository;
-
 
     @Override
     public List<Picture> findAll() {
@@ -43,5 +45,18 @@ public class PictureService implements CrudService<Picture>{
     @Transactional
     public void delete(int id) {
         pictureRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void uploadPicture(MultipartFile file, User user) throws IOException {
+        try {
+            Picture picture = new Picture();
+            picture.setProfile(user.getProfile());
+            picture.setPicture(file.getBytes());
+            pictureRepository.save(picture);
+        } catch (IOException ex) {
+            throw new IOException();
+        }
     }
 }

@@ -1,9 +1,10 @@
 package com.example.datingApp.dtos;
 
 import com.example.datingApp.models.Gender;
+import io.swagger.annotations.ApiModel;
 
 import java.util.List;
-
+@ApiModel(value = "Profile dto")
 public record ProfileDto(int id,
                          int height,
                          Gender gender,
