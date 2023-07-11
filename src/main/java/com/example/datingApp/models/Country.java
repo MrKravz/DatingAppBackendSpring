@@ -26,5 +26,10 @@ public class Country {
     @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
+    private List<Preference> preferences;
+
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ToString.Exclude
     private List<Profile> profiles;
 }

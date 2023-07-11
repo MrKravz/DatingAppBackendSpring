@@ -20,6 +20,17 @@ public class Preference {
     )
     private User user;
 
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "country_id",
+            referencedColumnName = "id"
+    )
+    private Country country;
+
     @Column(name = "min_age_gap")
     private int minAge;
 

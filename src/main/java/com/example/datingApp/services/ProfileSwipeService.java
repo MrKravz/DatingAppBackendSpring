@@ -24,13 +24,12 @@ public class ProfileSwipeService {
         var userProfile = userService.findById(userId).getProfile();
         var preference = userProfile.getUser().getPreference();
         var city = userProfile.getCity();
-        var country = city.getCountry();
         return findByPreferenceService.findByAgeGap(preference.getMinAge(),
                         preference.getMaxAge())
                 .stream()
                 .filter(x -> x.getUser().getId() != userId)
-                .filter(x->x.getGender() != userProfile.getGender())
-                .filter(x->x.getCountry() == country)
+                .filter(x->x.getGender() == preference.getGender())
+                .filter(x->x.getCountry() == preference.getCountry())
                 .sorted(Comparator.comparing(x-> compareCities(x.getCity(), city)))
                 .collect(Collectors.toList());
     }
