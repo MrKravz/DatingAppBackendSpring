@@ -24,7 +24,7 @@ public class ProfileController {
 
     @GetMapping("/new")
     @ApiOperation(value = "Provide model to create new profile", response = ProfileModel.class)
-    public ResponseEntity<ProfileModel> newProfile(@PathVariable("id") int id){
+    public ResponseEntity<ProfileModel> newProfile(@PathVariable("id") int id) {
         return new ResponseEntity<>(profileModelProviderService.configureProfileModel(id), HttpStatus.OK);
     }
 

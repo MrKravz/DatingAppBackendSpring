@@ -101,9 +101,11 @@ CREATE TABLE profiles_hobbies
 CREATE TABLE preferences
 (
     id          INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id     INT REFERENCES users (id) NOT NULL UNIQUE,
-    min_age_gap INT                       NOT NULL,
-    max_age_gap INT                       NOT NULL
+    user_id     INT REFERENCES users (id)     NOT NULL UNIQUE,
+    gender      VARCHAR(10)                   NOT NULL,
+    country_id  INT REFERENCES countries (id) NOT NULL,
+    min_age_gap INT                           NOT NULL,
+    max_age_gap INT                           NOT NULL
 );
 CREATE TABLE profiles_pics
 (
@@ -277,16 +279,18 @@ VALUES (1, 1),
        (10, 7),
        (10, 3);
 
-INSERT INTO preferences (user_id, min_age_gap, max_age_gap)
-VALUES (1, 18, 30),
-       (2, 18, 30),
-       (3, 18, 30),
-       (4, 18, 30),
-       (5, 18, 30),
-       (6, 18, 30),
-       (7, 18, 30),
-       (8, 18, 30),
-       (9, 18, 30),
-       (10, 18, 30);
+INSERT INTO preferences (user_id, gender, country_id, min_age_gap, max_age_gap)
+VALUES (1, 'Female', 1, 18, 30),
+       (2, 'Male', 3, 18, 30),
+       (3, 'Female', 1, 18, 30),
+       (4, 'Female', 1, 18, 30),
+       (5, 'Male', 1, 18, 30),
+       (6, 'Male', 1, 18, 30),
+       (7, 'Male', 1, 18, 30),
+       (8, 'Male', 1, 18, 30),
+       (9, 'Male', 1, 18, 30),
+       (10, 'Male', 1, 18, 30);
 
-CREATE INDEX age_index ON users(age);
+CREATE INDEX age_index ON users (age);
+
+SELECT * FROM profiles_pics;
