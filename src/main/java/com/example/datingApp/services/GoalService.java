@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.GoalDto;
+import com.example.datingApp.exceptions.GoalNotFound;
 import com.example.datingApp.mappers.GoalMapper;
 import com.example.datingApp.models.Goal;
 import com.example.datingApp.repositories.GoalRepository;
@@ -25,7 +26,7 @@ public class GoalService implements CrudService<Goal>, DtoService<GoalDto, Goal>
 
     @Override
     public Goal findById(int id) {
-        return goalRepository.findById(id).orElseThrow(RuntimeException::new);
+        return goalRepository.findById(id).orElseThrow(GoalNotFound::new);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.SportAttitudeDto;
+import com.example.datingApp.exceptions.SportAttitudeNotFound;
 import com.example.datingApp.mappers.SportAttitudeMapper;
 import com.example.datingApp.models.SportAttitude;
 import com.example.datingApp.repositories.SportAttitudeRepository;
@@ -25,7 +26,7 @@ public class SportAttitudeService implements CrudService<SportAttitude>, DtoServ
 
     @Override
     public SportAttitude findById(int id) {
-        return sportAttitudeRepository.findById(id).orElseThrow(RuntimeException::new);
+        return sportAttitudeRepository.findById(id).orElseThrow(SportAttitudeNotFound::new);
     }
 
     @Override

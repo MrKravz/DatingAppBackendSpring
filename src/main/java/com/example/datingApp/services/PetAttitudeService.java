@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.PetAttitudeDto;
+import com.example.datingApp.exceptions.PetAttitudeNotFound;
 import com.example.datingApp.mappers.PetAttitudeMapper;
 import com.example.datingApp.models.PetAttitude;
 import com.example.datingApp.repositories.PetAttitudeRepository;
@@ -25,7 +26,7 @@ public class PetAttitudeService implements CrudService<PetAttitude>, DtoService<
 
     @Override
     public PetAttitude findById(int id) {
-        return petAttitudeRepository.findById(id).orElseThrow(RuntimeException::new);
+        return petAttitudeRepository.findById(id).orElseThrow(PetAttitudeNotFound::new);
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {UserMapper.class, CityMapper.class, CountryMapper.class,
         GoalMapper.class, HobbyMapper.class, PetAttitudeMapper.class,
-        SmokingAttitudeMapper.class, SportAttitudeMapper.class, AlcoholAttitudeMapper.class})
+        SmokingAttitudeMapper.class, SportAttitudeMapper.class, AlcoholAttitudeMapper.class, PictureMapper.class})
 public interface ProfileMapper extends CommonMapper<ProfileDto, Profile>{
     @Override
     @Mapping(source = "user", target = "userDto")
@@ -20,6 +20,7 @@ public interface ProfileMapper extends CommonMapper<ProfileDto, Profile>{
     @Mapping(source = "smokingAttitude", target = "smokingAttitudeDto")
     @Mapping(source = "petAttitude", target = "petAttitudeDto")
     @Mapping(source = "zodiacSign", target = "zodiacSignDto")
+    @Mapping(source = "pictures", target = "pictureDtoList")
     ProfileDto toDto(Profile entity);
 
     @Override
@@ -33,5 +34,6 @@ public interface ProfileMapper extends CommonMapper<ProfileDto, Profile>{
     @Mapping(source = "smokingAttitudeDto", target = "smokingAttitude")
     @Mapping(source = "petAttitudeDto", target = "petAttitude")
     @Mapping(source = "zodiacSignDto", target = "zodiacSign")
+    @Mapping(source = "pictureDtoList", target = "pictures")
     Profile toEntity(ProfileDto entity);
 }

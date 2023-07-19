@@ -9,6 +9,6 @@ import java.io.IOException;
 public interface PictureProviderService {
 
     void uploadPicture(MultipartFile file, User user) throws IOException;
-    Picture findById(int id);
+    Picture getPictureById(int id);
 
 }

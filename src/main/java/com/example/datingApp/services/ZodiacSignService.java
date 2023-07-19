@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.ZodiacSignDto;
+import com.example.datingApp.exceptions.ZodiacSignNotFound;
 import com.example.datingApp.mappers.ZodiacSignMapper;
 import com.example.datingApp.models.ZodiacSign;
 import com.example.datingApp.repositories.ZodiacSignRepository;
@@ -25,7 +26,7 @@ public class ZodiacSignService implements CrudService<ZodiacSign>, DtoService<Zo
 
     @Override
     public ZodiacSign findById(int id) {
-        return zodiacSignRepository.findById(id).orElseThrow(RuntimeException::new);
+        return zodiacSignRepository.findById(id).orElseThrow(ZodiacSignNotFound::new);
     }
 
     @Override

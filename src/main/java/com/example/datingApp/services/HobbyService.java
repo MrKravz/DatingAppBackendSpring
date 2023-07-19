@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.HobbyDto;
+import com.example.datingApp.exceptions.HobbyNotFound;
 import com.example.datingApp.mappers.HobbyMapper;
 import com.example.datingApp.models.Hobby;
 import com.example.datingApp.repositories.HobbyRepository;
@@ -26,7 +27,7 @@ public class HobbyService implements CrudService<Hobby>, DtoService<HobbyDto, Ho
 
     @Override
     public Hobby findById(int id) {
-        return hobbyRepository.findById(id).orElseThrow(RuntimeException::new);
+        return hobbyRepository.findById(id).orElseThrow(HobbyNotFound::new);
     }
 
     @Override

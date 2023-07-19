@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.AlcoholAttitudeDto;
+import com.example.datingApp.exceptions.AlcoholAttitudeNotFound;
 import com.example.datingApp.mappers.AlcoholAttitudeMapper;
 import com.example.datingApp.models.AlcoholAttitude;
 import com.example.datingApp.repositories.AlcoholAttitudeRepository;
@@ -25,7 +26,7 @@ public class AlcoholAttitudeService implements CrudService<AlcoholAttitude>, Dto
 
     @Override
     public AlcoholAttitude findById(int id) {
-        return alcoholAttitudeRepository.findById(id).orElseThrow(RuntimeException::new);
+        return alcoholAttitudeRepository.findById(id).orElseThrow(AlcoholAttitudeNotFound::new);
     }
 
     @Override

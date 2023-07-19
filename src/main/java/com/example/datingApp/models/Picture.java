@@ -17,6 +17,9 @@ public class Picture {
     @ToString.Exclude
     private byte[] picture;
 
+    @Column(name = "blur_hash")
+    private String pictureBlurHash;
+
     @ManyToOne
     @JoinColumn(
             name = "profile_id",

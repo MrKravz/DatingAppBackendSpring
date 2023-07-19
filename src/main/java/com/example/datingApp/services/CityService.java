@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.CityDto;
+import com.example.datingApp.exceptions.CityNotFound;
 import com.example.datingApp.mappers.CityMapper;
 import com.example.datingApp.models.City;
 import com.example.datingApp.repositories.CityRepository;
@@ -25,7 +26,7 @@ public class CityService implements CrudService<City>, DtoService<CityDto, City>
 
     @Override
     public City findById(int id) {
-        return cityRepository.findById(id).orElseThrow(RuntimeException::new);
+        return cityRepository.findById(id).orElseThrow(CityNotFound::new);
     }
 
     @Override

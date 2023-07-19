@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.SmokingAttitudeDto;
+import com.example.datingApp.exceptions.SmokingAttitudeNotFound;
 import com.example.datingApp.mappers.SmokingAttitudeMapper;
 import com.example.datingApp.models.SmokingAttitude;
 import com.example.datingApp.repositories.SmokingAttitudeRepository;
@@ -25,7 +26,7 @@ public class SmokingAttitudeService implements CrudService<SmokingAttitude>, Dto
 
     @Override
     public SmokingAttitude findById(int id) {
-        return smokingAttitudeRepository.findById(id).orElseThrow(RuntimeException::new);
+        return smokingAttitudeRepository.findById(id).orElseThrow(SmokingAttitudeNotFound::new);
     }
 
     @Override

@@ -46,6 +46,6 @@ public class ModelProviderService implements UserModelProviderService, ProfileMo
         return new ProfileDto(0,0, null, "", userDto,
                 null, null, null,
                 null, null, null,
-                null, null,null);
+                null, null,null, null);
     }
 }

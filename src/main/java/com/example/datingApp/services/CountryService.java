@@ -1,6 +1,7 @@
 package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.CountryDto;
+import com.example.datingApp.exceptions.CountryNotFound;
 import com.example.datingApp.mappers.CountryMapper;
 import com.example.datingApp.models.Country;
 import com.example.datingApp.repositories.CountryRepository;
@@ -26,7 +27,7 @@ public class CountryService implements CrudService<Country>, DtoService<CountryD
 
     @Override
     public Country findById(int id) {
-        return countryRepository.findById(id).orElseThrow(RuntimeException::new);
+        return countryRepository.findById(id).orElseThrow(CountryNotFound::new);
     }
 
     @Override

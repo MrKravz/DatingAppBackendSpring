@@ -4,6 +4,7 @@ import com.example.datingApp.models.Gender;
 import io.swagger.annotations.ApiModel;
 
 import java.util.List;
+
 @ApiModel(value = "Profile dto")
 public record ProfileDto(int id,
                          int height,
@@ -18,6 +19,6 @@ public record ProfileDto(int id,
                          AlcoholAttitudeDto alcoholAttitudeDto,
                          SmokingAttitudeDto smokingAttitudeDto,
                          PetAttitudeDto petAttitudeDto,
-                         List<HobbyDto> hobbyDtoList) {
-    // TODO change dto
+                         List<HobbyDto> hobbyDtoList,
+                         List<PictureDto> pictureDtoList) {
 }

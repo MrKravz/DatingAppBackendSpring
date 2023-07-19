@@ -111,7 +111,8 @@ CREATE TABLE profiles_pics
 (
     id         INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     profile_id INT REFERENCES profiles (id) NOT NULL,
-    picture    BYTEA                        NOT NULL
+    picture    BYTEA                        NOT NULL,
+    blur_hash  VARCHAR(100)                 NOT NULL
 );
 CREATE TABLE users_roles
 (
@@ -292,5 +293,3 @@ VALUES (1, 'Female', 1, 18, 30),
        (10, 'Male', 1, 18, 30);
 
 CREATE INDEX age_index ON users (age);
-
-SELECT * FROM profiles_pics;
