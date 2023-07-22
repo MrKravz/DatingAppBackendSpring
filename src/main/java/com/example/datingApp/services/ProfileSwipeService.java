@@ -32,14 +32,15 @@ public class ProfileSwipeService {
                 .filter(x->x.getCountry() == preference.getCountry())
                 .sorted(Comparator.comparing(x-> compareCities(x.getCity(), city)))
                 .collect(Collectors.toList());
+        //TODO exclude mutual likes from list
     }
 
     public boolean likeUser(int likeProviderUserId, ProfileDto profileDto) {
-        var providerUser = userMapper.toDto(userService.findById(likeProviderUserId));
-        var receiverUser = profileDto.userDto();
-        var likeProviders = receiverUser.likeProviders();
+        var providerUser = userService.findById(likeProviderUserId);
+        var receiverUser = userMapper.toEntity(profileDto.userDto());
+        var likeProviders = receiverUser.getLikeProviders();
         likeProviders.add(providerUser);
-        return providerUser.likeProviders().contains(receiverUser);
+        return providerUser.getLikeProviders().contains(receiverUser);
     }
 
     private int compareCities(City city, City city1) {
