@@ -51,7 +51,7 @@ public class GoalService implements CrudService<Goal>, DtoService<GoalDto, Goal>
 
     @Override
     public List<GoalDto> findAllDto() {
-        return goalMapper.toIterableDto(findAll());
+        return goalMapper.toListDto(findAll());
     }
 
     @Override

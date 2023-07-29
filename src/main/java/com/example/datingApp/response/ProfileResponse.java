@@ -1,4 +1,4 @@
-package com.example.datingApp.util;
+package com.example.datingApp.response;
 
 import com.example.datingApp.dtos.*;
 import io.swagger.annotations.ApiModel;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @ApiModel(value = "Profile creation dto")
-public class ProfileModel {
+public class ProfileResponse {
 
     private ProfileDto profileDto;
 

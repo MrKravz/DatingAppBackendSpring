@@ -1,9 +1,9 @@
 package com.example.datingApp.services;
 
-import com.example.datingApp.util.ProfileModel;
+import com.example.datingApp.response.ProfileResponse;
 
 public interface ProfileModelProviderService {
 
-    ProfileModel configureProfileModel(int userId);
+    ProfileResponse configureProfileModel(int userId);
 
 }

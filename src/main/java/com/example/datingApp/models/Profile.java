@@ -34,13 +34,6 @@ public class Profile {
 
     @ManyToOne
     @JoinColumn(
-            name = "location_country_id",
-            referencedColumnName = "id"
-    )
-    private Country country;
-
-    @ManyToOne
-    @JoinColumn(
             name = "location_city_id",
             referencedColumnName = "id"
     )

@@ -51,7 +51,7 @@ public class PetAttitudeService implements CrudService<PetAttitude>, DtoService<
 
     @Override
     public List<PetAttitudeDto> findAllDto() {
-        return petAttitudeMapper.toIterableDto(findAll());
+        return petAttitudeMapper.toListDto(findAll());
     }
 
     @Override

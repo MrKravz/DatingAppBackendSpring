@@ -2,12 +2,10 @@ package com.example.datingApp.services;
 
 import com.example.datingApp.dtos.*;
 import com.example.datingApp.models.*;
-import com.example.datingApp.util.ProfileModel;
+import com.example.datingApp.response.ProfileResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collections;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,10 +24,10 @@ public class ModelProviderService implements UserModelProviderService, ProfileMo
     private final DtoService<ZodiacSignDto, ZodiacSign> zodiacSignDtoService;
 
     @Override
-    public ProfileModel configureProfileModel(int userId)
+    public ProfileResponse configureProfileModel(int userId)
     {
         var user = userDtoService.findDtoById(userId);
-        return new ProfileModel(emptyProfileDto(user), countryDtoService.findAllDto(), cityDtoService.findAllDto(),
+        return new ProfileResponse(emptyProfileDto(user), countryDtoService.findAllDto(), cityDtoService.findAllDto(),
                 goalDtoService.findAllDto(), zodiacSignDtoService.findAllDto(), sportAttitudeDtoService.findAllDto(),
                 alcoholAttitudeDtoService.findAllDto(), smokingAttitudeDtoService.findAllDto(), petAttitudeDtoService.findAllDto(),
                 hobbyDtoService.findAllDto());
@@ -38,7 +36,7 @@ public class ModelProviderService implements UserModelProviderService, ProfileMo
     @Override
     public UserDto configureUserModel()
     {
-        return new UserDto(0,"",18,"", Collections.emptyList());
+        return new UserDto(0,"",18,"");
     }
 
     private ProfileDto emptyProfileDto(UserDto userDto)
@@ -46,6 +44,6 @@ public class ModelProviderService implements UserModelProviderService, ProfileMo
         return new ProfileDto(0,0, null, "", userDto,
                 null, null, null,
                 null, null, null,
-                null, null,null, null);
+                null, null,null);
     }
 }

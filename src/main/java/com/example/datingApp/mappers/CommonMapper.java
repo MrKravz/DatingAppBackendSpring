@@ -7,7 +7,7 @@ public interface CommonMapper<D, E> {
 
     E toEntity(D dto);
 
-    List<D> toIterableDto(List<E> entityList);
+    List<D> toListDto(List<E> entityList);
 
-    List<E> toIterableEntity(List<D> dtoList);
+    List<E> toListEntity(List<D> dtoList);
 }

@@ -25,7 +25,7 @@ public class SwipeController {
     @GetMapping
     @ApiOperation(value = "Get profiles that match with user preference", response = List.class)
     public ResponseEntity<List<ProfileDto>> getProfiles(@PathVariable("id") int id){
-        return new ResponseEntity<>(profileMapper.toIterableDto(profileSwipeService.getSwipeList(id)), HttpStatus.OK);
+        return new ResponseEntity<>(profileMapper.toListDto(profileSwipeService.getSwipeList(id)), HttpStatus.OK);
     }
 
     @ExceptionHandler(ProfilesNotFoundException.class)

@@ -51,7 +51,7 @@ public class SmokingAttitudeService implements CrudService<SmokingAttitude>, Dto
 
     @Override
     public List<SmokingAttitudeDto> findAllDto() {
-        return smokingAttitudeMapper.toIterableDto(findAll());
+        return smokingAttitudeMapper.toListDto(findAll());
     }
 
     @Override

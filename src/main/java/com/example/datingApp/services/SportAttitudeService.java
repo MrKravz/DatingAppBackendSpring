@@ -51,7 +51,7 @@ public class SportAttitudeService implements CrudService<SportAttitude>, DtoServ
 
     @Override
     public List<SportAttitudeDto> findAllDto() {
-        return sportAttitudeMapper.toIterableDto(findAll());
+        return sportAttitudeMapper.toListDto(findAll());
     }
 
     @Override

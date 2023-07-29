@@ -51,7 +51,7 @@ public class AlcoholAttitudeService implements CrudService<AlcoholAttitude>, Dto
 
     @Override
     public List<AlcoholAttitudeDto> findAllDto() {
-        return alcoholAttitudeMapper.toIterableDto(findAll());
+        return alcoholAttitudeMapper.toListDto(findAll());
     }
 
     @Override

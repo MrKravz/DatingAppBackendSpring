@@ -5,7 +5,6 @@ import com.example.datingApp.exceptions.UserNotFoundException;
 import com.example.datingApp.exceptions.errorResponses.UserErrorResponse;
 import com.example.datingApp.models.User;
 import com.example.datingApp.services.DtoService;
-import com.example.datingApp.services.UserModelProviderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -19,20 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final DtoService<UserDto, User> userService;
-    private final UserModelProviderService userModelProviderService;
-
-    @GetMapping("/new")
-    @ApiOperation(value = "Get empty user to create a new user", response = UserDto.class)
-    public ResponseEntity<UserDto> newUser(){
-        return new ResponseEntity<>(userModelProviderService.configureUserModel(), HttpStatus.OK);
-    }
-
-    @PostMapping
-    @ApiOperation(value = "Create a new user", response = HttpStatus.class)
-    public ResponseEntity<HttpStatus> createUser(@RequestBody UserDto userDto){
-        userService.saveDto(userDto);
-        return ResponseEntity.ok(HttpStatus.CREATED);
-    }
 
     @PatchMapping("/user/{id}")
     @ApiOperation(value = "Edit user information", response = HttpStatus.class)

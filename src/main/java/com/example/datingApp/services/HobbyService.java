@@ -52,7 +52,7 @@ public class HobbyService implements CrudService<Hobby>, DtoService<HobbyDto, Ho
 
     @Override
     public List<HobbyDto> findAllDto() {
-        return hobbyMapper.toIterableDto(findAll());
+        return hobbyMapper.toListDto(findAll());
     }
 
     @Override

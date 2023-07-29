@@ -5,14 +5,13 @@ import com.example.datingApp.models.Profile;
 import org.mapstruct.*;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {UserMapper.class, CityMapper.class, CountryMapper.class,
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {UserMapper.class, CityMapper.class,
         GoalMapper.class, HobbyMapper.class, PetAttitudeMapper.class,
         SmokingAttitudeMapper.class, SportAttitudeMapper.class, AlcoholAttitudeMapper.class, PictureMapper.class})
 public interface ProfileMapper extends CommonMapper<ProfileDto, Profile>{
     @Override
     @Mapping(source = "user", target = "userDto")
     @Mapping(source = "city", target = "cityDto")
-    @Mapping(source = "country", target = "countryDto")
     @Mapping(source = "goal", target = "goalDto")
     @Mapping(source = "hobbies", target = "hobbyDtoList")
     @Mapping(source = "sportAttitude", target = "sportAttitudeDto")
@@ -26,7 +25,6 @@ public interface ProfileMapper extends CommonMapper<ProfileDto, Profile>{
     @Override
     @Mapping(source = "userDto", target = "user")
     @Mapping(source = "cityDto", target = "city")
-    @Mapping(source = "countryDto", target = "country")
     @Mapping(source = "goalDto", target = "goal")
     @Mapping(source = "hobbyDtoList", target = "hobbies")
     @Mapping(source = "sportAttitudeDto", target = "sportAttitude")

@@ -6,7 +6,7 @@ import com.example.datingApp.exceptions.errorResponses.ProfileErrorResponse;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.services.DtoService;
 import com.example.datingApp.services.ProfileModelProviderService;
-import com.example.datingApp.util.ProfileModel;
+import com.example.datingApp.response.ProfileResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -23,8 +23,8 @@ public class ProfileController {
     private final ProfileModelProviderService profileModelProviderService;
 
     @GetMapping("/new")
-    @ApiOperation(value = "Provide model to create new profile", response = ProfileModel.class)
-    public ResponseEntity<ProfileModel> newProfile(@PathVariable("id") int id) {
+    @ApiOperation(value = "Provide model to create new profile", response = ProfileResponse.class)
+    public ResponseEntity<ProfileResponse> newProfile(@PathVariable("id") int id) {
         return new ResponseEntity<>(profileModelProviderService.configureProfileModel(id), HttpStatus.OK);
     }
 

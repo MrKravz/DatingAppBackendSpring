@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -54,7 +55,7 @@ public class UserService implements CrudService<User>, DtoService<UserDto, User>
 
     @Override
     public List<UserDto> findAllDto() {
-        return userMapper.toIterableDto(findAll());
+        return userMapper.toListDto(findAll());
     }
 
     @Override
@@ -70,5 +71,9 @@ public class UserService implements CrudService<User>, DtoService<UserDto, User>
     @Override
     public User updateDto(UserDto dto, int id) {
         return update(userMapper.toEntity(dto), id);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

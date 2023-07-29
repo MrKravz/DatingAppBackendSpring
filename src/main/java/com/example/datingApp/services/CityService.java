@@ -51,7 +51,7 @@ public class CityService implements CrudService<City>, DtoService<CityDto, City>
 
     @Override
     public List<CityDto> findAllDto() {
-        return cityMapper.toIterableDto(findAll());
+        return cityMapper.toListDto(findAll());
     }
 
     @Override

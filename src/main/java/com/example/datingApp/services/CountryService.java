@@ -52,7 +52,7 @@ public class CountryService implements CrudService<Country>, DtoService<CountryD
 
     @Override
     public List<CountryDto> findAllDto() {
-        return countryMapper.toIterableDto(findAll());
+        return countryMapper.toListDto(findAll());
     }
 
     @Override

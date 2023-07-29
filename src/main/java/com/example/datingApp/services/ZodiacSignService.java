@@ -51,7 +51,7 @@ public class ZodiacSignService implements CrudService<ZodiacSign>, DtoService<Zo
 
     @Override
     public List<ZodiacSignDto> findAllDto() {
-        return zodiacSignMapper.toIterableDto(findAll());
+        return zodiacSignMapper.toListDto(findAll());
     }
 
     @Override

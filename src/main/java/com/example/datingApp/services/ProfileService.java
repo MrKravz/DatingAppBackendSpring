@@ -41,7 +41,6 @@ public class ProfileService implements CrudService<Profile>, DtoService<ProfileD
         var profileToUpdate = findById(id);
         profileToUpdate.setHeight(entity.getHeight());
         profileToUpdate.setAbout(entity.getAbout());
-        profileToUpdate.setCountry(entity.getCountry());
         profileToUpdate.setCity(entity.getCity());
         profileToUpdate.setZodiacSign(entity.getZodiacSign());
         profileToUpdate.setGoal(entity.getGoal());
@@ -60,7 +59,7 @@ public class ProfileService implements CrudService<Profile>, DtoService<ProfileD
 
     @Override
     public List<ProfileDto> findAllDto() {
-        return profileMapper.toIterableDto(findAll());
+        return profileMapper.toListDto(findAll());
     }
 
     @Override

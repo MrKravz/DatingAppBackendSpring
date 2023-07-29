@@ -29,7 +29,7 @@ public class ProfileSwipeService {
                 .stream()
                 .filter(x -> x.getUser().getId() != userId)
                 .filter(x->x.getGender() == preference.getGender())
-                .filter(x->x.getCountry() == preference.getCountry())
+                .filter(x->x.getCity().getCountry() == preference.getCountry())
                 .sorted(Comparator.comparing(x-> compareCities(x.getCity(), city)))
                 .collect(Collectors.toList());
         //TODO exclude mutual likes from list
