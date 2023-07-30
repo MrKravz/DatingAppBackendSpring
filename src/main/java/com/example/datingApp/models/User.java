@@ -32,12 +32,13 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @ToString.Exclude
     private Role role;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)

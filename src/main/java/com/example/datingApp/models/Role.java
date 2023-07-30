@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,8 +18,8 @@ public class Role {
     @Column(name = "name_of_role")
     private String name;
 
-    @OneToOne(mappedBy = "role")
+    @OneToMany(mappedBy = "role")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @ToString.Exclude
-    private User user;
+    private List<User> users;
 }
