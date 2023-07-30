@@ -4,13 +4,13 @@ import com.example.datingApp.requests.AuthRequest;
 import com.example.datingApp.response.AuthenticationResponse;
 import com.example.datingApp.requests.RegisterRequest;
 import com.example.datingApp.services.AuthService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
@@ -21,7 +21,7 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthRequest authRequest) {
         return ResponseEntity.ok(authService.authenticate(authRequest));
     }
 }

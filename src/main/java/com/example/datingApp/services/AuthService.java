@@ -28,11 +28,13 @@ public class AuthService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         String roleName = "User";
+        Integer profileId = null;
         user.setRole(roleService.findByName(roleName));
         userService.save(user);
         String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .userId(user.getId())
+                .profileId(profileId)
                 .token(jwtToken)
                 .build();
     }
@@ -45,6 +47,7 @@ public class AuthService {
         String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .userId(user.getId())
+                .profileId(user.getProfile() == null ? null : user.getProfile().getId())
                 .token(jwtToken)
                 .build();
     }
