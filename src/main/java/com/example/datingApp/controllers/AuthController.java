@@ -1,8 +1,7 @@
 package com.example.datingApp.controllers;
 
-import com.example.datingApp.requests.AuthRequest;
+import com.example.datingApp.requests.*;
 import com.example.datingApp.response.AuthenticationResponse;
-import com.example.datingApp.requests.RegisterRequest;
 import com.example.datingApp.services.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

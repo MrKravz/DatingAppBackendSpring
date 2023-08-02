@@ -1,7 +1,5 @@
 package com.example.datingApp.services;
 
-import com.example.datingApp.dtos.ProfileDto;
-import com.example.datingApp.mappers.UserMapper;
 import com.example.datingApp.models.City;
 import com.example.datingApp.models.Profile;
 import com.example.datingApp.models.User;
@@ -18,7 +16,6 @@ public class ProfileSwipeService {
 
     private final FindByPreferenceService findByPreferenceService;
     private final CrudService<User> userService;
-    private final UserMapper userMapper;
 
     public List<Profile> getSwipeList(int userId) {
         var userProfile = userService.findById(userId).getProfile();
@@ -35,9 +32,9 @@ public class ProfileSwipeService {
         //TODO exclude mutual likes from list
     }
 
-    public boolean likeUser(int likeProviderUserId, ProfileDto profileDto) {
+    public boolean likeUser(int likeProviderUserId, int likeReceiverUserId) {
         var providerUser = userService.findById(likeProviderUserId);
-        var receiverUser = userMapper.toEntity(profileDto.userDto());
+        var receiverUser = userService.findById(likeReceiverUserId);
         var likeProviders = receiverUser.getLikeProviders();
         likeProviders.add(providerUser);
         return providerUser.getLikeProviders().contains(receiverUser);

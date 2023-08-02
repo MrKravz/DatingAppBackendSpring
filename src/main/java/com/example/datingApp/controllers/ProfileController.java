@@ -4,11 +4,9 @@ import com.example.datingApp.dtos.ProfileDto;
 import com.example.datingApp.exceptions.ProfileNotFoundException;
 import com.example.datingApp.exceptions.errorResponses.ProfileErrorResponse;
 import com.example.datingApp.models.Profile;
-import com.example.datingApp.services.DtoService;
-import com.example.datingApp.services.ProfileModelProviderService;
+import com.example.datingApp.services.*;
 import com.example.datingApp.response.ProfileResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -30,27 +28,28 @@ public class ProfileController {
 
     @PostMapping
     @ApiOperation(value = "Create new profile", response = HttpStatus.class)
-    public ResponseEntity<HttpStatus> createProfile(@RequestBody ProfileDto profileDto){
-        profileService.saveDto(profileDto);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+    public ResponseEntity<Integer> createProfile(@PathVariable("id") int id,
+                                                 @RequestBody ProfileDto profileDto) {
+        var profile = profileService.saveDto(profileDto);
+        return new ResponseEntity<>(profile.getId(), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{profile_id}")
     @ApiOperation(value = "Edit your profile", response = HttpStatus.class)
     public ResponseEntity<HttpStatus> editProfileInfo(@RequestBody ProfileDto profileDto,
-                                                      @PathVariable("profile_id") int profile_id){
+                                                      @PathVariable("profile_id") int profile_id) {
         profileService.updateDto(profileDto, profile_id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/{profile_id}")
     @ApiOperation(value = "Get profile by it's id", response = ProfileDto.class)
-    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("profile_id") int profile_id){
+    public ResponseEntity<ProfileDto> getProfileById(@PathVariable("profile_id") int profile_id) {
         return new ResponseEntity<>(profileService.findDtoById(profile_id), HttpStatus.OK);
     }
 
     @ExceptionHandler(ProfileNotFoundException.class)
-    private ResponseEntity<ProfileErrorResponse> handleException(ProfileNotFoundException ex){
+    private ResponseEntity<ProfileErrorResponse> handleException(ProfileNotFoundException ex) {
         return new ResponseEntity<>(
                 new ProfileErrorResponse(ex.getMessage(), System.currentTimeMillis()),
                 HttpStatus.NOT_FOUND);
